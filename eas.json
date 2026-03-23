@@ -12,7 +12,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://YOUR_DEPLOYED_SERVER_URL"
+        "EXPO_PUBLIC_API_URL": "https://nutritack-production.up.railway.app"
       }
     },
     "production": {
@@ -20,7 +20,7 @@
         "buildType": "app-bundle"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://YOUR_DEPLOYED_SERVER_URL"
+        "EXPO_PUBLIC_API_URL": "https://nutritack-production.up.railway.app"
       }
     }
   },
