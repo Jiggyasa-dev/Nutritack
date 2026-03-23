@@ -82,7 +82,7 @@ const Dashboard = ({ navigation }: any) => {
     }
   }, [currentDate]);
 
-  useFocusEffect(loadData);
+  useFocusEffect(useCallback(() => { loadData(); }, [loadData]));
 
   /* ── Actions ────────────────────────────────────────── */
   const handleWater = async (i: number) => {

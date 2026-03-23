@@ -35,7 +35,7 @@ const SignIn = ({ navigation }: any) => {
   // Handle Google OAuth response
   React.useEffect(() => {
     if (response?.type === 'success') {
-      const { access_token } = response.authentication!;
+      const access_token = (response.authentication as any)?.accessToken || (response.authentication as any)?.access_token;
       handleBackendSignIn(access_token);
     } else if (response?.type === 'error') {
       Alert.alert('Sign-in failed', response.error?.message || 'Google authentication failed');
