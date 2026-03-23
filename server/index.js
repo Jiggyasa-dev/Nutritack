@@ -13,7 +13,7 @@ const foodsRouter   = require('./routes/foods');
 const analyzeRouter = require('./routes/analyze');
 
 const app  = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // ── Middleware ──────────────────────────────────────────────
 app.use(cors({ origin: '*' }));
@@ -59,7 +59,7 @@ app.use((err, _req, res, _next) => {
 });
 
 // ── Start ───────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n🚀 NutriTrack API running at http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🚀 NutriTrack API running on port ${PORT}`);
   console.log(`   Health: http://localhost:${PORT}/api/health\n`);
 });
