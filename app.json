@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "NutriTrack",
+    "slug": "nutritrack",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0097A7"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nutritrack.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "NutriTrack uses your camera to scan food and get instant nutrition information.",
+        "NSPhotoLibraryUsageDescription": "NutriTrack accesses your photo library so you can scan food photos for nutrition analysis."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0097A7",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.nutritrack.app",
+      "versionCode": 1,
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.INTERNET"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "NutriTrack accesses your photos to scan food for nutrition analysis.",
+          "cameraPermission": "NutriTrack uses your camera to scan food and get instant nutrition information."
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "https://YOUR_DEPLOYED_SERVER_URL"
+    }
+  }
+}
