@@ -1,4 +1,6 @@
 server/
+android/
+ios/
 *.log
 web_output.log
 error.log
