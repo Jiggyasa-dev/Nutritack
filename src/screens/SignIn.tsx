@@ -101,6 +101,27 @@ const SignIn = ({ navigation }: any) => {
           )}
         </TouchableOpacity>
 
+        <TouchableOpacity
+          style={styles.skipBtn}
+          onPress={async () => {
+            setLoading(true);
+            try {
+              await signIn('guest', {
+                id: 1, name: 'Guest User', email: 'guest@nutritrack.app',
+                avatar: '', dailyGoal: 2000, weight: '', height: '',
+                age: '', gender: '', goal: '',
+              });
+            } catch (err: any) {
+              Alert.alert('Error', err.message);
+            } finally {
+              setLoading(false);
+            }
+          }}
+          activeOpacity={0.85}
+        >
+          <Text style={styles.skipBtnText}>Continue as Guest</Text>
+        </TouchableOpacity>
+
         <Text style={styles.disclaimer}>
           By continuing, you agree to our Terms of Service.{'\n'}
           Your data is stored securely and never shared.
@@ -147,6 +168,13 @@ const styles = StyleSheet.create({
     width: 26, textAlign: 'center',
   },
   googleBtnText: { fontSize: 16, fontWeight: '800', color: '#1A1A2E' },
+
+  skipBtn: {
+    alignItems: 'center', justifyContent: 'center',
+    borderRadius: 14, paddingVertical: 14,
+    backgroundColor: PR_DARK,
+  },
+  skipBtnText: { fontSize: 15, fontWeight: '700', color: '#FFFFFF' },
 
   disclaimer: {
     fontSize: 11, color: '#BDBDBD', textAlign: 'center',

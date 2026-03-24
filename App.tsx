@@ -12,7 +12,7 @@ import Summary     from './src/screens/Summary';
 import FoodSearch  from './src/screens/FoodSearch';
 import Profile     from './src/screens/Profile';
 import WeightHistory from './src/screens/WeightHistory';
-import './src/styles/global.css';
+// import './src/styles/global.css'; // Removed — Tailwind CSS not supported in React Native
 
 const Stack  = createNativeStackNavigator();
 const Tab    = createBottomTabNavigator();
