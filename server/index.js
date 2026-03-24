@@ -39,6 +39,9 @@ app.use('/api/water',   waterRouter);
 app.use('/api/foods',        foodsRouter);
 app.use('/api/analyze-food', analyzeRouter);
 
+// ── Root endpoint ────────────────────────────────────────────
+app.get('/', (_req, res) => res.json({ status: 'ok', service: 'NutriTrack API' }));
+
 // ── Health check ────────────────────────────────────────────
 app.get('/api/health', async (_req, res) => {
   try {
