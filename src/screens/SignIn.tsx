@@ -1,59 +1,18 @@
 import React, { useState } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
-  ActivityIndicator, Alert, Image,
+  ActivityIndicator, Alert, SafeAreaView, ScrollView,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google';
-import { makeRedirectUri } from 'expo-auth-session';
 
-import { signInWithGoogle } from '../api/client';
 import { useAuth } from '../contexts/AuthContext';
-
-WebBrowser.maybeCompleteAuthSession();
 
 const PRIMARY = '#00BCD4';
 const PR_DARK = '#0097A7';
 
-// ── Replace these with your Google OAuth client IDs ──────────
-const ANDROID_CLIENT_ID = 'YOUR_ANDROID_CLIENT_ID.apps.googleusercontent.com';
-const WEB_CLIENT_ID     = 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
-// ─────────────────────────────────────────────────────────────
-
 const SignIn = ({ navigation }: any) => {
   const { signIn } = useAuth();
   const [loading, setLoading] = useState(false);
-
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: ANDROID_CLIENT_ID,
-    webClientId:     WEB_CLIENT_ID,
-    redirectUri: makeRedirectUri({ scheme: 'com.nutritrack.app' }),
-  });
-
-  // Handle Google OAuth response
-  React.useEffect(() => {
-    if (response?.type === 'success') {
-      const access_token = (response.authentication as any)?.accessToken || (response.authentication as any)?.access_token;
-      handleBackendSignIn(access_token);
-    } else if (response?.type === 'error') {
-      Alert.alert('Sign-in failed', response.error?.message || 'Google authentication failed');
-    }
-  }, [response]);
-
-  const handleBackendSignIn = async (accessToken: string) => {
-    setLoading(true);
-    try {
-      const result = await signInWithGoogle(accessToken);
-      await signIn(result.token, result.user);
-      // Navigation handled by App.tsx auth gate
-    } catch (err: any) {
-      Alert.alert('Error', err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -85,22 +44,6 @@ const SignIn = ({ navigation }: any) => {
 
       {/* Sign-in button */}
       <View style={styles.bottomSection}>
-        <TouchableOpacity
-          style={[styles.googleBtn, (!request || loading) && styles.googleBtnDisabled]}
-          onPress={() => promptAsync()}
-          disabled={!request || loading}
-          activeOpacity={0.85}
-        >
-          {loading ? (
-            <ActivityIndicator color={PR_DARK} />
-          ) : (
-            <>
-              <Text style={styles.googleIcon}>G</Text>
-              <Text style={styles.googleBtnText}>Continue with Google</Text>
-            </>
-          )}
-        </TouchableOpacity>
-
         <TouchableOpacity
           style={styles.skipBtn}
           onPress={async () => {
